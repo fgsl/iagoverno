@@ -1,0 +1,76 @@
+<?php
+/**
+ * @var $this Laminas\View\Renderer\PhpRenderer
+ */
+?>
+<h1>Indicadores</h1>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>&nbsp;</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total de órgãos</td>
+<td>&nbsp;</td>
+<td><?=$this->total_orgaos?></td>
+</tr>
+<tr>
+<td>Não forneceu resposta</td>
+<td>&nbsp;</td>
+<td><?=$this->total_sem_resposta . ' (' . round($this->total_sem_resposta/$this->total_orgaos*100,2) . '%)' ?></td>
+</tr>
+<tr>
+<td>Usa IA</td>
+<td>&nbsp;</td>
+<td><?=$this->total_usaia . ' (' . round($this->total_usaia/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Houve melhoria com o uso de IA</td>
+<td>&nbsp;</td>
+<td><?=$this->total_houvemelhoria . ' (' . round($this->total_houvemelhoria/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+
+<tr>
+<td>Há política interna para IA</td>
+<td>&nbsp;</td>
+<td><?=$this->total_hapolitica . ' (' . round($this->total_hapolitica/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>A política aborda questões éticas</td>
+<td>&nbsp;</td>
+<td><?=$this->total_questoeseticas  . ' (' . round($this->total_questoeseticas/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Faz pesquisa de IA</td>
+<td>&nbsp;</td>
+<td><?=$this->total_pesquisa  . ' (' . round($this->total_pesquisa/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Aplica</td>
+<td>&nbsp;</td>
+<td><?=$this->total_aplica  . ' (' . round($this->total_aplica/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Total de softwares</td>
+<td>&nbsp;</td>
+<td><?=$this->total_softwares_livres + $this->total_softwares_nao_livres?></td>
+</tr>
+<tr>
+<td>Total de softwares livres</td>
+<td>&nbsp;</td>
+<td><?=$this->total_softwares_livres?></td>
+</tr>
+<tr>
+<td>Total de softwares não livres</td>
+<td>&nbsp;</td>
+<td><?=$this->total_softwares_nao_livres?></td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>
