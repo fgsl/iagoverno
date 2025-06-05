@@ -23,7 +23,7 @@ class OrgaoController extends AbstractCrudController
     {
         $orgaoForm = new OrgaoForm();
         $options = [];
-        $tipos = $this->parentTable->getModels();
+        $tipos = $this->parentTable->getModels(null,'nome');
         foreach($tipos as $tipo){
             $options[$tipo->codigo] = $tipo->nome;
         }
@@ -39,10 +39,13 @@ class OrgaoController extends AbstractCrudController
     protected function getPost(): \ArrayObject
     {
         $post = $this->getRequest()->getPost();
-        $post['compra'] = (bool) $post['compra'];
-        $post['justifica'] = (bool) $post['justifica'];
-        $post['semresposta'] = (bool) $post['semresposta'];
-        $post['depende'] = (bool) $post['depende'];
+        $post['naorespondeu'] = (bool) $post['naorespondeu'];
+        $post['usaia'] = (bool) $post['usaia'];
+        $post['houvemelhoria'] = (bool) $post['houvemelhoria'];
+        $post['hapoliticainterna'] = (bool) $post['hapoliticainterna'];
+        $post['questoeseticas'] = (bool) $post['questoeseticas'];
+        $post['pesquisa'] = (bool) $post['pesquisa'];
+        $post['aplica'] = (bool) $post['aplica'];
         return $post;
     }
     
@@ -69,5 +72,5 @@ class OrgaoController extends AbstractCrudController
     {
         $alternativeSelect = $this->table->getSelectByAcronym($this->getRequest()->getPost('sigla'));
         return $this->getPaginator($alternativeSelect);
-    }    
+    }
 }

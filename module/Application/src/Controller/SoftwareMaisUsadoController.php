@@ -19,7 +19,7 @@ class SoftwareMaisUsadoController extends AbstractCrudController
   
     protected function getSelect(): Select
     {
-        return $this->table->getSelectTotalDeSoftwaresLivres();
+        return $this->table->getSelectTotalDeSoftwares();
     }
  
     public function getForm(bool $full = false): Form

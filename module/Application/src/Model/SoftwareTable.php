@@ -74,4 +74,17 @@ class SoftwareTable extends AbstractTableGateway
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet->current()->total_softwares;
     }
+
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDeSoftwares()
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_softwares' => new Expression('count(*)')]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_softwares;
+    }
+
 }

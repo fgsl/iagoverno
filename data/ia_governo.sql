@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1deb5ubuntu1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Tempo de geração: 27-Fev-2025 às 16:36
--- Versão do servidor: 8.0.41-0ubuntu0.22.04.1
--- versão do PHP: 8.1.31
+-- Host: localhost
+-- Tempo de geração: 02/06/2025 às 13:21
+-- Versão do servidor: 8.0.42-0ubuntu0.22.04.1
+-- Versão do PHP: 8.2.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `ia_governo`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categoria_software`
+-- Estrutura para tabela `categoria_software`
 --
 
 CREATE TABLE `categoria_software` (
@@ -37,7 +37,7 @@ CREATE TABLE `categoria_software` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `licenca`
+-- Estrutura para tabela `licenca`
 --
 
 CREATE TABLE `licenca` (
@@ -49,12 +49,12 @@ CREATE TABLE `licenca` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `orgao`
+-- Estrutura para tabela `orgao`
 --
 
 CREATE TABLE `orgao` (
   `codigo` int NOT NULL,
-  `nome` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nome` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `tipo_orgao` int NOT NULL,
   `semresposta` tinyint(1) NOT NULL DEFAULT '0',
   `sigla` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `orgao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `protocolo`
+-- Estrutura para tabela `protocolo`
 --
 
 CREATE TABLE `protocolo` (
@@ -81,7 +81,7 @@ CREATE TABLE `protocolo` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `protocolo_orgao`
+-- Estrutura para tabela `protocolo_orgao`
 --
 
 CREATE TABLE `protocolo_orgao` (
@@ -92,7 +92,7 @@ CREATE TABLE `protocolo_orgao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `software`
+-- Estrutura para tabela `software`
 --
 
 CREATE TABLE `software` (
@@ -107,7 +107,7 @@ CREATE TABLE `software` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `software_orgao`
+-- Estrutura para tabela `software_orgao`
 --
 
 CREATE TABLE `software_orgao` (
@@ -118,7 +118,7 @@ CREATE TABLE `software_orgao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipo_orgao`
+-- Estrutura para tabela `tipo_orgao`
 --
 
 CREATE TABLE `tipo_orgao` (
@@ -131,57 +131,57 @@ CREATE TABLE `tipo_orgao` (
 --
 
 --
--- Índices para tabela `categoria_software`
+-- Índices de tabela `categoria_software`
 --
 ALTER TABLE `categoria_software`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `licenca`
+-- Índices de tabela `licenca`
 --
 ALTER TABLE `licenca`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `orgao`
+-- Índices de tabela `orgao`
 --
 ALTER TABLE `orgao`
   ADD PRIMARY KEY (`codigo`),
   ADD UNIQUE KEY `nome` (`nome`);
 
 --
--- Índices para tabela `protocolo`
+-- Índices de tabela `protocolo`
 --
 ALTER TABLE `protocolo`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `protocolo_orgao`
+-- Índices de tabela `protocolo_orgao`
 --
 ALTER TABLE `protocolo_orgao`
   ADD PRIMARY KEY (`codigo_protocolo`,`codigo_orgao`);
 
 --
--- Índices para tabela `software`
+-- Índices de tabela `software`
 --
 ALTER TABLE `software`
   ADD PRIMARY KEY (`codigo`),
   ADD UNIQUE KEY `nome` (`nome`);
 
 --
--- Índices para tabela `software_orgao`
+-- Índices de tabela `software_orgao`
 --
 ALTER TABLE `software_orgao`
   ADD PRIMARY KEY (`codigo_software`,`codigo_orgao`);
 
 --
--- Índices para tabela `tipo_orgao`
+-- Índices de tabela `tipo_orgao`
 --
 ALTER TABLE `tipo_orgao`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
