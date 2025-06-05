@@ -12,9 +12,9 @@ class SoftwareDeOrgaoController extends AbstractCrudController
 {
     protected int $itemCountPerPage = 10;
     
-    protected string $modelClass = 'Application\Model\Software';
+    protected string $modelClass = 'Application\Model\SoftwareDeOrgao';
     
-    protected string $tableClass = 'Application\Model\SoftwareTable';
+    protected string $tableClass = 'Application\Model\SoftwareDeOrgaoTable';
     
     protected string $pageArg = 'key';
 
@@ -107,16 +107,16 @@ class SoftwareDeOrgaoController extends AbstractCrudController
         
         if ($filtern == 'orgao'){
             $orgao = $filterv;
-        }        
+        }
         if (!empty($software)){
             $this->itemCountPerPage = 60;
-            return $this->table->getSelectBySoftware($software);            
+            return $this->table->getSelectBySoftware($software);
         }
         if (!empty($orgao)){
             $this->itemCountPerPage = 60;
             return $this->table->getSelectByOrgao($orgao);
-        }            
+        }
         
         return $this->table->getSelect();
-    }   
+    }
 }

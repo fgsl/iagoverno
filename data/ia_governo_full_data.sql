@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1deb5ubuntu1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Tempo de geração: 27-Fev-2025 às 16:42
--- Versão do servidor: 8.0.41-0ubuntu0.22.04.1
--- versão do PHP: 8.1.31
+-- Host: localhost
+-- Tempo de geração: 02/06/2025 às 13:21
+-- Versão do servidor: 8.0.42-0ubuntu0.22.04.1
+-- Versão do PHP: 8.2.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `ia_governo`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categoria_software`
+-- Estrutura para tabela `categoria_software`
 --
 
 CREATE TABLE `categoria_software` (
@@ -35,7 +35,7 @@ CREATE TABLE `categoria_software` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `categoria_software`
+-- Despejando dados para a tabela `categoria_software`
 --
 
 INSERT INTO `categoria_software` (`codigo`, `nome`) VALUES
@@ -150,7 +150,7 @@ INSERT INTO `categoria_software` (`codigo`, `nome`) VALUES
 (110, 'Grafos'),
 (111, 'Groupware'),
 (112, 'Helpdesk'),
-(113, 'IDE'),
+(113, 'IDE (Integrated Development Environment)'),
 (114, 'IMAP e POP3'),
 (115, 'Impressão'),
 (116, 'Indexação'),
@@ -292,12 +292,29 @@ INSERT INTO `categoria_software` (`codigo`, `nome`) VALUES
 (253, 'Simulação de Processos'),
 (254, 'Contabilidade'),
 (255, 'Análise de Sistemas Elétricos'),
-(256, 'Análise Marinha');
+(256, 'Análise Marinha'),
+(257, 'Workflow'),
+(258, 'Vigilância'),
+(259, 'Aplicações baseadas em voz e texto'),
+(260, 'Análise Preditiva'),
+(261, 'Extração, Transformação e Carga'),
+(262, 'Revisão de texto'),
+(263, 'Tradução'),
+(264, 'Triagem médica'),
+(265, 'Geração de imagens'),
+(266, 'Farmácia'),
+(267, 'Reconhecimento de texto'),
+(268, 'Distribuição de processos'),
+(269, 'Reconhecimento de voz'),
+(270, 'Gestão de conhecimento'),
+(271, 'Gerenciamento de comunidade'),
+(272, 'Computação quântica'),
+(273, 'Classificação de texto');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `licenca`
+-- Estrutura para tabela `licenca`
 --
 
 CREATE TABLE `licenca` (
@@ -307,7 +324,7 @@ CREATE TABLE `licenca` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `licenca`
+-- Despejando dados para a tabela `licenca`
 --
 
 INSERT INTO `licenca` (`codigo`, `nome`, `livre`) VALUES
@@ -386,17 +403,22 @@ INSERT INTO `licenca` (`codigo`, `nome`, `livre`) VALUES
 (100, 'Descontinuado', 0),
 (101, 'cocos2d', 1),
 (102, 'WinPcap', 1),
-(103, 'Haskell', 1);
+(103, 'Haskell', 1),
+(104, 'Oracle No-Fee Terms and Conditions ', 0),
+(105, 'NumPy', 1),
+(106, 'NodeJS', 1),
+(107, 'The Glasgow Haskell Compiler License', 1),
+(108, 'YOLO LICENSE', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `orgao`
+-- Estrutura para tabela `orgao`
 --
 
 CREATE TABLE `orgao` (
   `codigo` int NOT NULL,
-  `nome` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `nome` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `tipo_orgao` int NOT NULL,
   `semresposta` tinyint(1) NOT NULL DEFAULT '0',
   `sigla` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -410,7 +432,7 @@ CREATE TABLE `orgao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `orgao`
+-- Despejando dados para a tabela `orgao`
 --
 
 INSERT INTO `orgao` (`codigo`, `nome`, `tipo_orgao`, `semresposta`, `sigla`, `pedidos`, `usaia`, `houvemelhoria`, `hapoliticainterna`, `questoeseticas`, `pesquisa`, `aplica`) VALUES
@@ -580,12 +602,64 @@ INSERT INTO `orgao` (`codigo`, `nome`, `tipo_orgao`, `semresposta`, `sigla`, `pe
 (165, 'Instituto Federal de Educação, Ciência e Tecnologia Sul-Rio- Grandense', 4, 0, 'IFSul', 0, 0, 0, 0, 0, 0, 0),
 (166, 'Instituto Federal de Educação, Ciência e Tecnologia do Sul de Minas Gerais', 4, 0, 'IFSULDEMINAS', 0, 0, 0, 0, 0, 0, 0),
 (167, 'Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro', 4, 0, 'IFTM', 0, 0, 0, 0, 0, 0, 0),
-(168, 'Instituto Federal de Educação, Ciência e Tecnologia do Tocantins', 4, 0, 'IFTO', 0, 0, 0, 0, 0, 0, 0);
+(168, 'Instituto Federal de Educação, Ciência e Tecnologia do Tocantins', 4, 0, 'IFTO', 0, 0, 0, 0, 0, 0, 0),
+(169, 'Banco Central do Brasil', 9, 0, 'BACEN', 0, 0, 0, 0, 0, 0, 0),
+(170, 'Banco do Nordeste do Brasil S.A.', 3, 0, 'BNB', 0, 0, 0, 0, 0, 0, 0),
+(171, 'Conselho Administrativo de Defesa Econômica', 12, 0, 'CADE', 0, 0, 0, 0, 0, 0, 0),
+(172, 'Coordenação de Aperfeiçoamento de Pessoal de Nível Superior', 9, 0, 'CAPES', 0, 0, 0, 0, 0, 0, 0),
+(173, 'Centro Brasileiro de Pesquisas Físicas', 9, 0, 'CBPF', 0, 0, 0, 0, 0, 0, 0),
+(174, 'Comando do Exército', 13, 0, 'CEX', 0, 0, 0, 0, 0, 0, 0),
+(175, 'Controladoria-Geral da União', 9, 0, 'CGU', 0, 0, 0, 0, 0, 0, 0),
+(176, 'Comando da Marinha', 13, 0, 'CMAR', 0, 0, 0, 0, 0, 0, 0),
+(177, 'Casa da Moeda do Brasil', 9, 0, 'CMB', 0, 0, 0, 0, 0, 0, 0),
+(178, 'Comissão Nacional de Energia Nuclear', 11, 0, 'CNEN', 0, 0, 0, 0, 0, 0, 0),
+(179, 'Companhia das Docas do Estado da Bahia', 3, 0, 'CODEBA', 0, 0, 0, 0, 0, 0, 0),
+(180, 'Companhia Docas do Rio Grande do Norte', 3, 0, 'CODERN', 0, 0, 0, 0, 0, 0, 0),
+(181, 'Companhia de Pesquisa de Recursos Minerais', 3, 0, 'CPRM', 0, 0, 0, 0, 0, 0, 0),
+(182, 'Centro de Tecnologia da Informação Renato Archer', 3, 0, 'CTI', 0, 0, 0, 0, 0, 0, 0),
+(183, 'Empresa Brasil de Comunicação S.A.', 3, 0, 'EBC', 0, 0, 0, 0, 0, 0, 0),
+(184, 'Hospital de Clínicas de Uberlândia', 1, 0, 'EBSERH - HC-UFU', 0, 0, 0, 0, 0, 0, 0),
+(187, 'Fundação Escola Nacional de Administração Pública', 15, 0, 'ENAP', 0, 0, 0, 0, 0, 0, 0),
+(188, 'Fundação Nacional de Artes', 15, 0, 'FUNARTE', 0, 0, 0, 0, 0, 0, 0),
+(189, 'Fundação Cultural Palmares', 15, 0, 'FCP', 0, 0, 0, 0, 0, 0, 0),
+(190, 'Hospital de Clínicas de Porto Alegre', 1, 0, 'HCPA', 0, 0, 0, 0, 0, 0, 0),
+(191, 'Fundação Instituto Brasileiro de Geografia e Estatística', 15, 0, 'IBGE', 0, 0, 0, 0, 0, 0, 0),
+(192, 'Instituto Brasileiro de Informação em Ciência e Tecnologia', 9, 0, 'IBICT', 0, 0, 0, 0, 0, 0, 0),
+(195, 'Instituto Nacional de Colonização e Reforma Agrária', 9, 0, 'INCRA', 0, 0, 0, 0, 0, 0, 0),
+(196, 'Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira', 9, 0, 'INEP', 0, 0, 0, 0, 0, 0, 0),
+(197, 'Instituto Nacional da Propriedade Industrial', 9, 0, 'INPI', 0, 0, 0, 0, 0, 0, 0),
+(198, 'Ministério da Justiça e Segurança Pública', 7, 0, 'MJSP', 0, 0, 0, 0, 0, 0, 0),
+(199, 'Ministério dos Transportes', 7, 0, 'MT', 0, 0, 0, 0, 0, 0, 0),
+(200, 'Agência Brasileira de Inteligência', 1, 0, 'ABIN', 0, 0, 0, 0, 0, 0, 0),
+(201, 'Autoridade Nacional de Proteção de Dados', 9, 0, 'ANPD', 0, 0, 0, 0, 0, 0, 0),
+(202, 'Banco da Amazônia S.A.', 3, 0, 'BASA', 0, 0, 0, 0, 0, 0, 0),
+(203, 'Banco Nacional de Desenvolvimento Econômico e Social', 9, 0, 'BNDES', 0, 0, 0, 0, 0, 0, 0),
+(204, 'Centro Nacional de Tecnologia Eletrônica Avançada S.A.', 2, 0, 'CEITEC', 0, 0, 0, 0, 0, 0, 0),
+(205, 'Conselho Nacional de Desenvolvimento Científico e Tecnológico', 12, 0, 'CNPQ', 0, 0, 0, 0, 0, 0, 0),
+(206, 'Conselho de Controle de Atividades Financeiras', 12, 0, 'COAF', 0, 0, 0, 0, 0, 0, 0),
+(207, 'Companhia de Desenvolvimento dos Vales do São Francisco e do Parnaíba', 3, 0, 'CODEVASF', 0, 0, 0, 0, 0, 0, 0),
+(208, 'Comando da Aeronáutica', 13, 0, 'COMAER', 0, 0, 0, 0, 0, 0, 0),
+(209, 'Comissão de Valores Mobiliários', 11, 0, 'CVM', 0, 0, 0, 0, 0, 0, 0),
+(210, 'Departamento Penitenciário Nacional', 9, 0, 'DEPEN', 0, 0, 0, 0, 0, 0, 0),
+(211, 'Departamento Nacional de Infraestrutura de Transportes', 9, 0, 'DNIT', 0, 0, 0, 0, 0, 0, 0),
+(212, 'Departamento de Polícia Federal', 16, 0, 'DPF', 0, 0, 0, 0, 0, 0, 0),
+(213, 'Departamento de Polícia Rodoviária Federal', 16, 0, 'DPRF', 0, 0, 0, 0, 0, 0, 0),
+(214, '(HC e MVFA) Complexo Hospitalar de Clínicas da Universidade Federal do Paraná', 14, 0, 'EBSERH – CHC-UFPR', 0, 0, 0, 0, 0, 0, 0),
+(215, 'Centro Federal de Educação Tecnológica Celso Suckow da Fonseca', 4, 0, 'CEFET-RJ', 0, 0, 0, 0, 0, 0, 0),
+(216, 'Petrobras Biocombustível S.A.', 3, 0, 'PETROBIO', 0, 0, 0, 0, 0, 0, 0),
+(217, 'Petrobras Logística de Exploração e Produção S.A.', 3, 0, 'PETROLOG', 0, 0, 0, 0, 0, 0, 0),
+(218, 'Casa Civil da Presidência da República', 7, 0, 'CC-PR', 0, 0, 0, 0, 0, 0, 0),
+(220, 'Superintendência Nacional de Previdência Complementar', 9, 0, 'PREVIC', 0, 0, 0, 0, 0, 0, 0),
+(221, 'Ministério da Fazenda', 7, 0, 'MF', 0, 0, 0, 0, 0, 0, 0),
+(222, 'Universidade Federal do Agreste de Pernambuco', 8, 0, 'UFAPE', 0, 0, 0, 0, 0, 0, 0),
+(223, 'Universidade Federal de Catalão', 8, 0, 'UFCAT', 0, 0, 0, 0, 0, 0, 0),
+(224, 'Universidade Federal do Delta do Parnaíba', 8, 0, 'UFDPar', 0, 0, 0, 0, 0, 0, 0),
+(225, 'Universidade Federal de Jataí', 8, 0, 'UFJ', 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `protocolo`
+-- Estrutura para tabela `protocolo`
 --
 
 CREATE TABLE `protocolo` (
@@ -594,7 +668,7 @@ CREATE TABLE `protocolo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `protocolo`
+-- Despejando dados para a tabela `protocolo`
 --
 
 INSERT INTO `protocolo` (`codigo`, `nome`) VALUES
@@ -618,7 +692,7 @@ INSERT INTO `protocolo` (`codigo`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `protocolo_orgao`
+-- Estrutura para tabela `protocolo_orgao`
 --
 
 CREATE TABLE `protocolo_orgao` (
@@ -629,7 +703,7 @@ CREATE TABLE `protocolo_orgao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `software`
+-- Estrutura para tabela `software`
 --
 
 CREATE TABLE `software` (
@@ -641,10 +715,174 @@ CREATE TABLE `software` (
   `observacoes` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Despejando dados para a tabela `software`
+--
+
+INSERT INTO `software` (`codigo`, `nome`, `codigo_categoria`, `website`, `codigo_licenca`, `observacoes`) VALUES
+(1027, 'Power BI', 32, 'https://www.microsoft.com/pt-br/power-platform/products/power-bi', 49, 'O Power BI é um componente do Microsoft Fabric.'),
+(1028, 'Python', 127, 'https://www.python.org/', 42, ''),
+(1029, 'Pandas', 7, 'https://pandas.pydata.org', 10, ''),
+(1030, 'Scikit-Learn', 15, 'https://scikit-learn.org', 8, ''),
+(1031, 'NLTK', 215, 'https://www.nltk.org/', 6, ''),
+(1032, 'SAS Viya', 7, 'https://www.sas.com/pt_br/software/viya.html', 49, ''),
+(1033, 'ArcGIS Pro', 117, 'https://www.esri.com/pt-br/arcgis/products/arcgis-pro/overview', 49, ''),
+(1034, 'ServiceNow', 257, 'https://www.servicenow.com/', 49, ''),
+(1035, 'Digifort LPR', 177, 'https://www.digifort.com.br/leitura-de-placas.php', 49, ''),
+(1036, 'BriefCam Platform', 258, 'https://www.briefcam.com/solutions/platform-overview/', 49, ''),
+(1037, 'Rasa', 15, 'https://github.com/RasaHQ/rasa/', 6, ''),
+(1038, 'QnA Maker', 215, 'https://learn.microsoft.com/pt-br/azure/ai-services/qnamaker/', 49, ''),
+(1039, 'Language Understanding (LUIS)', 259, 'https://learn.microsoft.com/en-us/azure/ai-services/luis/what-is-luis', 49, ''),
+(1040, 'Conversational language understanding (CLU)', 259, 'https://learn.microsoft.com/en-us/azure/ai-services/language-service/conversational-language-understanding/overview', 98, ''),
+(1041, 'RStudio', 73, 'https://posit.co/products/open-source/rstudio/', 3, ''),
+(1042, 'IBM SPSS Statistic', 73, 'https://www.ibm.com/products/spss-statistics', 49, ''),
+(1043, 'IBM SPSS Modeler', 260, 'https://www-ibm-com.translate.goog/products/spss-modeler', 49, ''),
+(1044, 'IBM Watson Studio', 7, 'https://www.ibm.com/products/watson-studio', 49, ''),
+(1045, 'SAS Enterprise Miner', 134, 'https://www.sas.com/pt_br/software/enterprise-miner.html', 49, ''),
+(1046, 'Ferramentas de Apoio à Interoperabilidade de Sistema (FAIS', 261, '', 49, ''),
+(1047, 'Watson Explorer Deep Analytics Edition', 7, 'https://www.ibm.com/mysupport/s/topic/0TO500000002D9NGAU/watson-explorer?language=en_US', 49, ''),
+(1048, 'MatLab', 130, 'https://www.mathworks.com/products/matlab.html', 49, ''),
+(1049, 'R', 73, 'https://www.r-project.org/', 17, ''),
+(1050, 'PyTorch', 15, 'https://pytorch.org/', 8, ''),
+(1051, 'Dialogflow', 251, 'https://cloud.google.com/products/conversational-agents', 49, ''),
+(1052, 'ChatGPT', 251, 'https://chatgpt.com/', 49, ''),
+(1053, 'QuillBot', 69, 'https://quillbot.com/', 98, ''),
+(1054, 'Poe', 262, 'https://poe.com', 49, ''),
+(1055, 'Grammarly', 262, 'https://www.grammarly.com/', 49, ''),
+(1056, 'Turnitin', 262, 'https://www.turnitin.com.br/', 49, ''),
+(1057, 'Google Earth Engine', 117, 'https://www.google.com.br/earth/', 49, ''),
+(1058, 'QGIS', 117, 'https://qgis.org/', 18, ''),
+(1059, 'ConabOCR', 155, 'https://ocr.conab.gov.br/', 49, ''),
+(1060, 'Tesseract', 267, 'https://tesseract-ocr.github.io/', 6, ''),
+(1061, 'TensorFlow', 15, 'https://www.tensorflow.org', 6, ''),
+(1062, 'Hugging Face', 15, 'https://huggingface.co/', 49, ''),
+(1063, 'Weka', 15, 'https://ml.cms.waikato.ac.nz/weka/', 17, ''),
+(1064, 'SAS Text Miner', 134, 'https://support.sas.com/en/software/text-miner-support.html', 49, ''),
+(1065, 'Google Cloud Speech-to-Text', 175, 'https://cloud.google.com/speech-to-text', 49, ''),
+(1066, 'Google Cloud Text-to-Speech', 205, 'https://cloud.google.com/text-to-speech', 49, ''),
+(1067, 'Google Cloud Translation', 263, 'https://cloud.google.com/translate', 49, ''),
+(1068, 'RapidAI', 264, 'https://www.rapidai.com', 49, ''),
+(1069, 'AphidCV', 192, '', 49, ''),
+(1070, 'InsectCV', 192, '', 49, ''),
+(1071, 'EDVMobile', 192, '', 49, ''),
+(1072, 'PalmTreeDetector', 192, '', 49, ''),
+(1073, 'SeedCV', 192, '', 49, ''),
+(1074, 'SAWSOM', 192, '', 49, ''),
+(1075, 'Flora', 192, '', 49, ''),
+(1076, 'Azure AI Video Indexer', 10, 'https://azure.microsoft.com/pt-br/products/ai-video-indexer', 49, ''),
+(1077, 'Gupy', 232, 'https://www.gupy.io/', 49, ''),
+(1078, 'Apponte', 232, 'https://apponte.com.br/', 49, ''),
+(1079, 'Eva', 251, 'https://www.escolavirtual.gov.br/perguntas-frequentes', 49, ''),
+(1080, 'Microsoft 365 Copilot', 172, 'https://www.office.com/', 49, ''),
+(1081, 'BlueWillow', 265, 'https://www.bluewillow.ai/', 49, ''),
+(1082, 'Movavi', 68, 'https://www.movavi.com/', 49, ''),
+(1083, 'CapCut', 68, 'https://www.capcut.com', 49, ''),
+(1084, 'noharm.ai', 266, 'https://noharm.ai/', 49, ''),
+(1085, 'Accord.NET Framework', 15, 'http://accord-framework.net/', 49, ''),
+(1086, 'SymSpell', 12, 'https://github.com/wolfgarbe/SymSpell', 31, ''),
+(1087, 'LIBLINEAR', 15, 'https://www.csie.ntu.edu.tw/~cjlin/liblinear/', 10, ''),
+(1088, 'kraken', 267, 'https://kraken.re', 6, ''),
+(1089, 'dinglehopper', 267, 'https://ravius.sbb.berlin/', 6, ''),
+(1090, 'Transkribus', 267, 'https://www.transkribus.org/', 49, ''),
+(1091, 'Anaconda', 7, 'https://www.anaconda.com', 49, ''),
+(1092, 'Keras', 15, 'https://keras.io/', 6, ''),
+(1093, 'Roboflow', 177, 'https://roboflow.com/', 49, ''),
+(1094, 'Google Colab', 7, 'https://colab.research.google.com/', 49, ''),
+(1095, 'Java', 127, '', 104, ''),
+(1096, 'Jupyter Notebook', 7, 'https://jupyter.org/', 10, ''),
+(1097, 'Teachable Machine', 15, 'https://teachablemachine.withgoogle.com/', 49, ''),
+(1098, 'PyCharm', 113, '', 49, ''),
+(1099, 'YOLO', 177, 'https://yolov8.com/', 3, ''),
+(1100, 'Visual Studio Code (VSCode)', 113, '', 31, ''),
+(1101, 'Scilab', 47, '', 18, ''),
+(1102, 'C++', 127, 'https://isocpp.org', 17, ''),
+(1103, 'Amazon Aurora', 28, 'https://aws.amazon.com/pt/rds/aurora/', 49, ''),
+(1104, 'BigQuery', 28, 'https://cloud.google.com/bigquery', 49, ''),
+(1105, 'Label Studio', 177, 'https://github.com/HumanSignal/labelImg', 31, ''),
+(1106, 'Matplotlib', 82, 'https://matplotlib.org/', 42, ''),
+(1107, 'Seaborn', 178, '', 10, ''),
+(1108, 'NumPy', 47, 'https://numpy.org', 105, ''),
+(1109, 'SciPy', 47, 'https://scipy.org/', 8, ''),
+(1110, 'OpenCV', 177, 'https://opencv.org', 12, ''),
+(1111, 'imbalanced-learn', 7, 'https://imbalanced-learn.org', 31, ''),
+(1112, 'IBM ILOG CPLEX', 7, 'https://www.ibm.com/br-pt/products/ilog-cplex-optimization-studio', 49, ''),
+(1113, 'C', 127, 'https://gcc.gnu.org/', 17, ''),
+(1114, 'NodeJS', 79, 'https://nodejs.org', 106, ''),
+(1115, 'venom-bot', 251, 'https://www.npmjs.com/package/venom-bot', 31, ''),
+(1116, 'NetLogo', 253, 'https://ccl.northwestern.edu/netlogo/', 48, ''),
+(1117, 'Flutter', 113, 'https://flutter.dev', 10, ''),
+(1118, 'PHP', 127, 'https://www.php.net/', 39, ''),
+(1119, 'SerproBots', 251, 'https://serprobots.estaleiro.serpro.gov.br/', 49, ''),
+(1120, 'NetBox', 236, 'https://netboxlabs.com/oss/netbox/', 6, ''),
+(1121, 'Trello', 96, 'https://trello.com', 49, ''),
+(1122, 'Facenet', 155, 'https://github.com/davidsandberg/facenet', 31, ''),
+(1123, 'e-Distribuidor', 268, 'https://www.gov.br/inpi/pt-br', 49, ''),
+(1124, 'Application Router', 268, 'https://www.gov.br/inpi/pt-br', 49, ''),
+(1125, 'Azure AI Search', 31, 'https://azure.microsoft.com/en-us/products/ai-services/ai-search', 49, ''),
+(1126, 'Azure Speech Service', 269, 'https://learn.microsoft.com/pt-br/azure/ai-services/speech-service/', 49, ''),
+(1128, 'Amazon SageMaker', 15, 'https://aws.amazon.com/pt/sagemaker', 49, ''),
+(1129, 'Azure Machine Learning', 15, 'https://azure.microsoft.com/pt-br/products/machine-learning', 49, ''),
+(1130, 'Whisper', 269, 'https://openai.com/index/whisper/', 49, ''),
+(1131, 'Victor', 24, '', 49, ''),
+(1132, 'RAFA 2030', 24, '', 49, ''),
+(1133, 'VitorIA', 24, '', 49, ''),
+(1134, 'Docker', 48, 'https://www.docker.com/', 6, ''),
+(1135, 'Quartus Prime', 96, 'https://www.intel.com.br/content/www/br/pt/products/details/fpga/development-tools/quartus-prime.html', 49, ''),
+(1136, 'Qt', 79, 'https://www.qt.io/product/framework', 49, ''),
+(1137, 'Reallusion', 265, 'https://www.reallusion.com/', 49, ''),
+(1138, 'Sony Movie Studio', 195, 'https://www.vegascreativesoftware.com', 49, ''),
+(1139, 'ELAN', 195, 'https://archive.mpi.nl/tla/elan', 48, ''),
+(1140, 'PeerSim', 253, 'https://peersim.sourceforge.net/', 17, ''),
+(1141, 'GHC Haskell', 127, 'https://www.haskell.org/ghc/', 107, ''),
+(1142, 'Torch.AI', 32, 'https://www.torch.ai/', 49, ''),
+(1143, 'Microsoft Cognitive Toolkit (CNTK)', 15, 'https://github.com/microsoft/CNTK', 31, ''),
+(1144, 'Detectron2', 155, 'https://github.com/facebookresearch/detectron2', 6, ''),
+(1145, 'Mask R-CNN', 155, 'https://github.com/matterport/Mask_RCNN', 31, ''),
+(1146, 'Darknet', 216, 'https://github.com/pjreddie/darknet', 108, ''),
+(1147, 'Geodata', 117, 'https://cran.r-project.org/web/packages/geodata/index.html', 20, ''),
+(1148, 'Kaggle', 271, 'https://www.kaggle.com/', 49, ''),
+(1149, 'Fortran', 127, 'https://gcc.gnu.org/onlinedocs/gcc-4.2.4/gfortran/', 17, ''),
+(1150, 'Pennylane', 79, 'https://pennylane.ai/', 6, ''),
+(1151, 'Qiskit', 272, 'https://github.com/Qiskit/qiskit', 6, ''),
+(1152, 'Spyder', 113, 'https://www.spyder-ide.org/', 31, ''),
+(1153, 'Aperio ImageScope', 210, 'https://www.leicabiosystems.com/pt-br/imagem-de-patologia/manage/aperio-imagescope/', 49, ''),
+(1154, 'Gimp', 68, 'https://www.gimp.org/', 17, ''),
+(1155, 'GPS Status & Toolbox', 117, 'https://play.google.com/store/apps/details?id=com.eclipsim.gpsstatus', 49, ''),
+(1156, 'AutoCAD', 236, 'https://www.autodesk.com/br/products/autocad/overview', 49, ''),
+(1157, 'CodeBERT', 215, 'https://github.com/microsoft/CodeBERT', 31, ''),
+(1158, 'Gurobi Solver Engine', 130, 'https://www.solver.com/gurobi-solver-engine', 49, ''),
+(1159, 'Google OR-Tools', 47, 'https://developers.google.com/optimization', 49, ''),
+(1160, 'COIN-OR', 271, 'https://www.coin-or.org', 98, ''),
+(1161, 'Apache Spark', 7, 'https://spark.apache.org/', 6, ''),
+(1162, 'Esper', 7, 'https://github.com/espertechinc/esper', 18, ''),
+(1163, 'Jason', 127, 'https://jason-lang.github.io/', 29, ''),
+(1164, 'Jade', 79, 'https://jade-project.gitlab.io/', 26, ''),
+(1165, 'tidyverse', 7, 'https://www.tidyverse.org/', 12, ''),
+(1166, 'Tableau', 7, 'https://www.tableau.com', 49, ''),
+(1167, 'Orange Data Mining', 15, 'https://orangedatamining.com', 20, ''),
+(1168, 'RapidMiner', 7, 'https://rapidminer.qsoft.com.br/', 49, ''),
+(1169, 'Gaussian', 153, 'https://gaussian.com', 49, ''),
+(1170, 'Jira', 96, 'https://www.atlassian.com/br/software/jira', 49, ''),
+(1171, 'Confluence', 96, 'https://www.atlassian.com/br/software/confluence', 49, ''),
+(1172, 'Github', 98, 'https://github.com/', 49, ''),
+(1173, 'Gitlab', 98, 'https://about.gitlab.com/solutions/source-code-management/', 49, ''),
+(1174, 'Bitbucket', 98, 'https://bitbucket.org', 49, ''),
+(1175, 'Metaflow', 79, 'https://metaflow.org/', 6, ''),
+(1176, 'Apache Airflow', 257, 'https://airflow.apache.org/', 6, ''),
+(1177, 'Golang', 127, 'https://go.dev/', 10, ''),
+(1178, 'MaxQDA', 7, 'https://www.maxqda.com', 49, ''),
+(1179, 'PK-Sim', 266, 'https://github.com/Open-Systems-Pharmacology/PK-Sim', 18, ''),
+(1180, 'GastroPlus', 266, 'https://www.simulations-plus.com/software/gastroplus/', 49, ''),
+(1181, 'Monolix', 266, 'https://www.simulations-plus.com/software/monolix/monolix/', 49, ''),
+(1182, 'PyMuPDF', 92, 'https://pymupdf.readthedocs.io', 2, ''),
+(1183, 'fastText', 273, 'https://fasttext.cc/', 31, ''),
+(1184, 'fast.ai', 216, 'https://www.fast.ai/', 6, ''),
+(1185, 'Transformers', 15, 'https://github.com/huggingface/transformers', 6, '');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `software_orgao`
+-- Estrutura para tabela `software_orgao`
 --
 
 CREATE TABLE `software_orgao` (
@@ -652,10 +890,363 @@ CREATE TABLE `software_orgao` (
   `codigo_orgao` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
+--
+-- Despejando dados para a tabela `software_orgao`
+--
+
+INSERT INTO `software_orgao` (`codigo_software`, `codigo_orgao`) VALUES
+(1027, 91),
+(1028, 2),
+(1028, 14),
+(1028, 15),
+(1028, 23),
+(1028, 25),
+(1028, 27),
+(1028, 29),
+(1028, 32),
+(1028, 43),
+(1028, 48),
+(1028, 55),
+(1028, 56),
+(1028, 62),
+(1028, 79),
+(1028, 83),
+(1028, 125),
+(1028, 130),
+(1028, 145),
+(1028, 147),
+(1028, 150),
+(1028, 151),
+(1028, 153),
+(1028, 157),
+(1028, 161),
+(1028, 164),
+(1028, 167),
+(1028, 169),
+(1028, 170),
+(1028, 171),
+(1028, 175),
+(1028, 178),
+(1028, 181),
+(1028, 197),
+(1028, 215),
+(1028, 223),
+(1029, 2),
+(1029, 18),
+(1029, 27),
+(1029, 29),
+(1029, 43),
+(1029, 48),
+(1029, 52),
+(1029, 130),
+(1029, 153),
+(1029, 164),
+(1030, 2),
+(1030, 18),
+(1030, 29),
+(1030, 43),
+(1030, 52),
+(1030, 56),
+(1030, 62),
+(1030, 85),
+(1030, 130),
+(1030, 145),
+(1030, 151),
+(1030, 153),
+(1030, 164),
+(1030, 181),
+(1030, 182),
+(1030, 222),
+(1030, 224),
+(1031, 85),
+(1031, 130),
+(1031, 153),
+(1032, 83),
+(1032, 90),
+(1032, 99),
+(1033, 95),
+(1034, 99),
+(1035, 131),
+(1036, 131),
+(1037, 169),
+(1037, 176),
+(1038, 199),
+(1039, 105),
+(1041, 14),
+(1041, 29),
+(1041, 33),
+(1041, 145),
+(1041, 150),
+(1041, 170),
+(1042, 55),
+(1042, 170),
+(1043, 170),
+(1044, 170),
+(1045, 170),
+(1046, 172),
+(1047, 172),
+(1048, 2),
+(1048, 13),
+(1048, 21),
+(1048, 29),
+(1048, 145),
+(1048, 147),
+(1048, 178),
+(1049, 14),
+(1049, 21),
+(1049, 27),
+(1049, 55),
+(1049, 62),
+(1049, 125),
+(1049, 145),
+(1049, 147),
+(1049, 150),
+(1049, 151),
+(1049, 178),
+(1049, 181),
+(1050, 18),
+(1050, 48),
+(1050, 62),
+(1050, 145),
+(1050, 150),
+(1050, 151),
+(1050, 157),
+(1050, 181),
+(1050, 215),
+(1050, 224),
+(1051, 174),
+(1052, 33),
+(1052, 151),
+(1052, 167),
+(1052, 178),
+(1052, 188),
+(1052, 189),
+(1052, 198),
+(1053, 178),
+(1054, 178),
+(1055, 178),
+(1056, 178),
+(1057, 112),
+(1057, 151),
+(1057, 168),
+(1058, 55),
+(1058, 62),
+(1058, 112),
+(1058, 151),
+(1059, 112),
+(1060, 85),
+(1060, 112),
+(1060, 192),
+(1061, 2),
+(1061, 15),
+(1061, 18),
+(1061, 27),
+(1061, 32),
+(1061, 52),
+(1061, 62),
+(1061, 145),
+(1061, 153),
+(1061, 164),
+(1061, 181),
+(1061, 182),
+(1061, 224),
+(1062, 182),
+(1063, 56),
+(1063, 62),
+(1064, 84),
+(1065, 183),
+(1066, 183),
+(1067, 183),
+(1068, 184),
+(1068, 190),
+(1069, 117),
+(1070, 117),
+(1071, 117),
+(1072, 117),
+(1073, 117),
+(1074, 117),
+(1075, 117),
+(1076, 187),
+(1077, 187),
+(1078, 187),
+(1079, 187),
+(1080, 62),
+(1080, 188),
+(1080, 221),
+(1081, 189),
+(1082, 189),
+(1083, 189),
+(1084, 190),
+(1085, 191),
+(1086, 191),
+(1087, 191),
+(1088, 192),
+(1089, 192),
+(1090, 192),
+(1091, 21),
+(1091, 29),
+(1091, 43),
+(1091, 48),
+(1091, 56),
+(1091, 145),
+(1091, 150),
+(1091, 151),
+(1092, 2),
+(1092, 18),
+(1092, 32),
+(1092, 62),
+(1092, 145),
+(1092, 150),
+(1092, 153),
+(1092, 164),
+(1093, 145),
+(1093, 150),
+(1094, 2),
+(1094, 14),
+(1094, 15),
+(1094, 25),
+(1094, 27),
+(1094, 33),
+(1094, 48),
+(1094, 56),
+(1094, 145),
+(1094, 150),
+(1094, 151),
+(1094, 153),
+(1095, 29),
+(1095, 145),
+(1095, 167),
+(1096, 29),
+(1096, 32),
+(1096, 33),
+(1096, 48),
+(1096, 145),
+(1096, 150),
+(1096, 151),
+(1096, 153),
+(1097, 145),
+(1098, 29),
+(1098, 33),
+(1098, 145),
+(1099, 14),
+(1099, 23),
+(1099, 145),
+(1100, 14),
+(1100, 16),
+(1100, 25),
+(1100, 32),
+(1100, 43),
+(1100, 148),
+(1100, 150),
+(1101, 150),
+(1102, 2),
+(1102, 150),
+(1102, 153),
+(1103, 150),
+(1104, 150),
+(1105, 150),
+(1106, 43),
+(1106, 48),
+(1106, 153),
+(1107, 153),
+(1108, 2),
+(1108, 27),
+(1108, 43),
+(1108, 48),
+(1108, 153),
+(1109, 153),
+(1110, 23),
+(1110, 27),
+(1110, 85),
+(1110, 153),
+(1111, 153),
+(1112, 33),
+(1112, 153),
+(1112, 223),
+(1113, 2),
+(1113, 153),
+(1113, 197),
+(1114, 154),
+(1115, 154),
+(1116, 161),
+(1117, 33),
+(1117, 167),
+(1118, 14),
+(1118, 167),
+(1119, 195),
+(1120, 168),
+(1121, 25),
+(1121, 168),
+(1122, 86),
+(1122, 196),
+(1123, 197),
+(1124, 197),
+(1125, 198),
+(1126, 199),
+(1128, 79),
+(1129, 79),
+(1130, 86),
+(1131, 87),
+(1132, 87),
+(1133, 87),
+(1134, 125),
+(1135, 29),
+(1136, 29),
+(1137, 29),
+(1138, 29),
+(1139, 29),
+(1140, 29),
+(1141, 29),
+(1142, 29),
+(1144, 222),
+(1145, 222),
+(1146, 14),
+(1146, 23),
+(1147, 55),
+(1148, 48),
+(1149, 32),
+(1150, 32),
+(1151, 32),
+(1152, 23),
+(1152, 43),
+(1152, 225),
+(1153, 225),
+(1154, 225),
+(1155, 225),
+(1156, 225),
+(1159, 33),
+(1160, 33),
+(1161, 18),
+(1162, 18),
+(1163, 18),
+(1164, 18),
+(1165, 18),
+(1166, 21),
+(1167, 56),
+(1167, 62),
+(1168, 56),
+(1169, 23),
+(1170, 25),
+(1171, 25),
+(1172, 25),
+(1173, 25),
+(1174, 25),
+(1175, 52),
+(1176, 52),
+(1177, 27),
+(1178, 62),
+(1179, 62),
+(1180, 62),
+(1181, 62),
+(1182, 85),
+(1183, 85),
+(1184, 85),
+(1185, 85);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipo_orgao`
+-- Estrutura para tabela `tipo_orgao`
 --
 
 CREATE TABLE `tipo_orgao` (
@@ -664,95 +1255,101 @@ CREATE TABLE `tipo_orgao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `tipo_orgao`
+-- Despejando dados para a tabela `tipo_orgao`
 --
 
 INSERT INTO `tipo_orgao` (`codigo`, `nome`) VALUES
 (1, 'agência'),
 (2, 'centro de pesquisa'),
 (3, 'estatal'),
-(4, 'instituto federal'),
+(4, 'instituto federal de educação'),
 (5, 'judiciário'),
 (6, 'legislativo'),
 (7, 'ministério'),
 (8, 'universidade'),
-(9, 'outro');
+(9, 'outro'),
+(11, 'comissão'),
+(12, 'conselho'),
+(13, 'forças armadas'),
+(14, 'hospital'),
+(15, 'fundação'),
+(16, 'polícia');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `categoria_software`
+-- Índices de tabela `categoria_software`
 --
 ALTER TABLE `categoria_software`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `licenca`
+-- Índices de tabela `licenca`
 --
 ALTER TABLE `licenca`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `orgao`
+-- Índices de tabela `orgao`
 --
 ALTER TABLE `orgao`
   ADD PRIMARY KEY (`codigo`),
   ADD UNIQUE KEY `nome` (`nome`);
 
 --
--- Índices para tabela `protocolo`
+-- Índices de tabela `protocolo`
 --
 ALTER TABLE `protocolo`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Índices para tabela `protocolo_orgao`
+-- Índices de tabela `protocolo_orgao`
 --
 ALTER TABLE `protocolo_orgao`
   ADD PRIMARY KEY (`codigo_protocolo`,`codigo_orgao`);
 
 --
--- Índices para tabela `software`
+-- Índices de tabela `software`
 --
 ALTER TABLE `software`
   ADD PRIMARY KEY (`codigo`),
   ADD UNIQUE KEY `nome` (`nome`);
 
 --
--- Índices para tabela `software_orgao`
+-- Índices de tabela `software_orgao`
 --
 ALTER TABLE `software_orgao`
   ADD PRIMARY KEY (`codigo_software`,`codigo_orgao`);
 
 --
--- Índices para tabela `tipo_orgao`
+-- Índices de tabela `tipo_orgao`
 --
 ALTER TABLE `tipo_orgao`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `categoria_software`
 --
 ALTER TABLE `categoria_software`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
 
 --
 -- AUTO_INCREMENT de tabela `licenca`
 --
 ALTER TABLE `licenca`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de tabela `orgao`
 --
 ALTER TABLE `orgao`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
 
 --
 -- AUTO_INCREMENT de tabela `protocolo`
@@ -764,13 +1361,13 @@ ALTER TABLE `protocolo`
 -- AUTO_INCREMENT de tabela `software`
 --
 ALTER TABLE `software`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1027;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1186;
 
 --
 -- AUTO_INCREMENT de tabela `tipo_orgao`
 --
 ALTER TABLE `tipo_orgao`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

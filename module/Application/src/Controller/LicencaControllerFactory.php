@@ -1,17 +1,21 @@
 <?php
 namespace Application\Controller;
 
-use Laminas\ServiceManager\Factory\FactoryInterface;
-use Interop\Container\ContainerInterface;
+use Application\Model\Licenca;
 use Laminas\Db\TableGateway\TableGateway;
 use Application\Model\LicencaTable;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface as ContainerContainerInterface;
 
 class LicencaControllerFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerContainerInterface $container, $requestedName, ?array $options = null)
     {
         $adapter = $container->get('Laminas\Db\Adapter');
-        $tableGateway = new TableGateway('licenca', $adapter);
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new Licenca('codigo','licenca',$adapter));
+        $tableGateway = new TableGateway('licenca', $adapter, null, $resultSetPrototype);
         $table = new LicencaTable($tableGateway);
         return new LicencaController($table);
     }

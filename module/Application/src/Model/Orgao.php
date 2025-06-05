@@ -19,29 +19,36 @@ class Orgao extends AbstractActiveRecord
             $inputFilter = new InputFilter();
             $inputFilter->addInput('nome');
             $inputFilter->addInput('tipo_orgao');
-            $inputFilter->addInput('compra',false);
-            $inputFilter->addInput('justifica',false);
             $inputFilter->addInput('semresposta',false);
-            $inputFilter->addInput('depende',false);
+            $inputFilter->addInput('usaia',false);
+            $inputFilter->addInput('houvemelhoria',false);
+            $inputFilter->addInput('hapoliticainterna',false);
+            $inputFilter->addInput('questoeseticas',false);
+            $inputFilter->addInput('pesquisa',false);
+            $inputFilter->addInput('aplica',false);
             $inputFilter->addInput('sigla',false);
             $inputFilter->addInput('pedidos');
-            $inputFilter->addInput('desenvolveusl',false);
             $inputFilter->addFilter('codigo', new ToInt());
             $inputFilter->addFilter('nome', new StringTrim());
             $inputFilter->addFilter('tipo_orgao', new ToInt());
-            $inputFilter->addFilter('compra', new Boolean());
-            $inputFilter->addFilter('justifica', new Boolean());
             $inputFilter->addFilter('semresposta', new Boolean());
-            $inputFilter->addFilter('depende', new Boolean());
+            $inputFilter->addFilter('usaia',new Boolean());
+            $inputFilter->addFilter('houvemelhoria',new Boolean());
+            $inputFilter->addFilter('hapoliticainterna',new Boolean());
+            $inputFilter->addFilter('questoeseticas',new Boolean());
+            $inputFilter->addFilter('pesquisa',new Boolean());
+            $inputFilter->addFilter('aplica',new Boolean());
             $inputFilter->addFilter('sigla', new StringTrim());
             $inputFilter->addFilter('pedidos', new ToInt());
             $inputFilter->addValidator('nome', new StringLength(['min'=>3,'max'=>80]));
             $inputFilter->addValidator('tipo_orgao', new IsInt());
-            $inputFilter->addValidator('compra', new NotEmpty(NotEmpty::NULL));
-            $inputFilter->addValidator('justifica', new NotEmpty(NotEmpty::NULL));
             $inputFilter->addValidator('semresposta', new NotEmpty(NotEmpty::NULL));
-            $inputFilter->addValidator('depende', new NotEmpty(NotEmpty::NULL));
-            $inputFilter->addValidator('desenvolveusl', new NotEmpty(NotEmpty::NULL));
+            $inputFilter->addValidator('usaia', new NotEmpty(NotEmpty::NULL));
+            $inputFilter->addValidator('houvemelhoria', new NotEmpty(NotEmpty::NULL));
+            $inputFilter->addValidator('hapoliticainterna', new NotEmpty(NotEmpty::NULL));
+            $inputFilter->addValidator('questoeseticas', new NotEmpty(NotEmpty::NULL));
+            $inputFilter->addValidator('pesquisa', new NotEmpty(NotEmpty::NULL));
+            $inputFilter->addValidator('aplica', new NotEmpty(NotEmpty::NULL));
             $inputFilter->addValidator('pedidos', new IsInt());
             $inputFilter->addChains();
             $this->inputFilter = $inputFilter;
@@ -62,11 +69,13 @@ class Orgao extends AbstractActiveRecord
     
     public function __get($name){
         switch ($name) {
-            case 'total_compra'                 :
-            case 'total_justifica'              :
-            case 'total_sem_resposta'           :
-            case 'total_depende_de_avaliacao'   :
-            case 'total_desenvolveu_floss'      :
+            case 'naorespondeu'             :
+            case 'usaia'                    :
+            case 'houvemelhoria'            :
+            case 'hapoliticainterna'        :
+            case 'questoeseticas'           :
+            case 'pesquisa'                 :
+            case 'aplica'                   :
                 return $this->data[$name];
             default: 
                 return parent::__get($name);

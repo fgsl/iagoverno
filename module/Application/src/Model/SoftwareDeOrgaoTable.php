@@ -35,7 +35,7 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         if ($models->count() == 0 || $models->current() == null ){
             $model = $this->modelName;
             return new $model(
-                $this->keyName,
+                $keyName,
                 $this->tableGateway->getTable(),
                 $this->tableGateway->getAdapter());
         }
@@ -109,6 +109,16 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         return $select;
     }
 
+    public function getSelectTotalDeSoftwares(): Select
+    {
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total' => new Expression('count(codigo_software)')]);
+        $select->join('software', 'software.codigo=software_orgao.codigo_software',['software' => 'nome']);
+        $select->group('codigo_software');
+        $select->order('total DESC');
+        return $select;
+    }
+
     public function getSelectTotalDeCategorias(): Select
     {
         $select = new Select($this->tableGateway->getTable());
@@ -140,8 +150,6 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         $select->columns(['total' => new Expression('count(codigo_orgao)')]);
         $select->join('orgao', 'orgao.codigo=software_orgao.codigo_orgao',['orgao' => 'nome']);
         $select->join('software', 'software.codigo=software_orgao.codigo_software',[]);
-        $select->join('licenca', 'licenca.codigo=software.codigo_licenca',['livre']);
-        $select->where(['licenca.livre' => true]);
         $select->group('codigo_orgao');
         $select->order('total DESC');
         return $select;
@@ -149,14 +157,14 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
     
     public function getSelectMaioresTiposDeOrgaosUsuarios(): Select
     {
-        $select = new Select($this->tableGateway->getTable());
+        $subSelect = new Select($this->tableGateway->getTable());
+        $subSelect->columns(['codigo_orgao' => new Expression('distinct software_orgao.codigo_orgao')]);
+        $select = new Select();
+        $select->from(['so' => $subSelect]);
         $select->columns(['total' => new Expression('count(tipo_orgao)')]);
-        $select->join('orgao', 'orgao.codigo=software_orgao.codigo_orgao',[]);
+        $select->join('orgao', 'orgao.codigo=so.codigo_orgao',[]);
         $select->join('tipo_orgao', 'tipo_orgao.codigo=orgao.tipo_orgao',['tipo' => 'nome']);
-        $select->join('software', 'software.codigo=software_orgao.codigo_software',[]);
-        $select->join('licenca', 'licenca.codigo=software.codigo_licenca',['livre']);
-        $select->where(['licenca.livre' => true]);
-        $select->group('tipo_orgao');
+        $select->group('tipo');
         $select->order('total DESC');
         return $select;
     }
